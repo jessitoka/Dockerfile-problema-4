@@ -1,0 +1,13 @@
+FROM node:14 # en esta linea de comando lo que hace es que le indica que descargue o baje como un pull, la imagen oficial (verificada) de Node.js, especiicamente el que es su versión 14.
+
+WORKDIR /usr/src/app # Es como carpetas entre carpetas, como lo usamos en el cmd, lo que hace es ingresar a esa ruta y comenzar a trabajar alli a menos que le indiquemos que queremos salir, asi que lo que ocurra en adelante seria dentro de la carpeta que esa ruta lleva.
+
+COPY package*.json ./ #Este comando hace que se copien ese archivo package.json en otra direccion que en este caso el "./" significa que sea en la carpeta actual y como mencione en la linea anterior, estariamos en la carpeta app de la ruta que indica alli.
+
+RUN npm install  # Indica que se instalen las dependencias  de node que vienen en el archivo (package) que anteriormente se movió.
+
+COPY . . #Copia todo y lo comparte con el contenedor, como una actualizacion seria.
+
+EXPOSE 3000 #Este es el puerto que utiliza Node, y por lo tanto es por donde debe de tener acceso el contenedor, asi que pr eso se le indica o "expone"
+
+CMD ["node", "app.js"] #El CMD es como un detector que indica cuando la iamgen esta siendo usada y entonces se ejecutan las lineas de comandos de la imagen, y el formato que tiene dentro viene indicando que se iniciará en node apps.js
